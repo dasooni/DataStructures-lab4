@@ -1,0 +1,4 @@
+C:/Users/Dasmit/Desktop/lab4/build/CMakeFiles/Lab4a.dir
+C:/Users/Dasmit/Desktop/lab4/build/CMakeFiles/Lab4b.dir
+C:/Users/Dasmit/Desktop/lab4/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/Dasmit/Desktop/lab4/build/CMakeFiles/ZERO_CHECK.dir

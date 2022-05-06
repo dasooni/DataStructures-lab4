@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Dasmit\Desktop\lab4\code\code4b\dsets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Dasmit\Desktop\lab4\code\code4b\graph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Dasmit\Desktop\lab4\code\code4b\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Dasmit\Desktop\lab4\code\code4b\edge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Dasmit\Desktop\lab4\code\code4b\dsets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Dasmit\Desktop\lab4\code\code4b\heap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Dasmit\Desktop\lab4\code\code4b\graph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Dasmit\Desktop\lab4\code\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\Dasmit\Desktop\lab4\code\code4b\graph1.txt" />
+    <None Include="C:\Users\Dasmit\Desktop\lab4\code\code4b\graph1_test_run.txt" />
+    <None Include="C:\Users\Dasmit\Desktop\lab4\code\code4b\graph2.txt" />
+    <None Include="C:\Users\Dasmit\Desktop\lab4\code\code4b\graph2_test_run.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{2CD2B6AA-23C5-368F-A219-498D60826B0A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{B9046BAB-454D-3270-B561-A801AC34E813}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
