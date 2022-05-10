@@ -70,32 +70,37 @@ void Digraph::removeEdge(const Edge& e) {
 void Digraph::uwsssp(int s) const {
     assert(s >= 1 && s <= size);
 
-	// Queue used for BFS traversal
+
+    // Queue used for BFS traversal
     std::queue<int> Q;
 	
-    //Pushing the start vertex into the queue 
-	Q.push(s);
-	
+    for (int i = 0; i < size; ++i) {
+
+		dist[i] = std::numeric_limits<int>::max();
+        path[i] = 0;
+    }
+
 	
 	//Setting the distance of the start vertex to 0
 	dist[s] = 0;
-	//Setting the path of the start vertex to itself as it is visited by now
-	path[s] = s;
-	
+    //Pushing the start vertex into the queue 
+    Q.push(s);
+
+
 	// Loop to traverse the graph. Until queue is empty.
     while (!Q.empty()) {
     
         int u = Q.front(); 
         Q.pop();
-         //dist[s] = 1;
-		//path[s] = u;
+
+		std::cout << u << " ";
 		
 		//Loop to traverse the adjacency list of the current vertex
         for (auto it = table[u].begin(); it != table[u].end(); ++it) {
-			int v = it->tail; // The tail of the edge
+            int v = it->tail;
 			
 			//If the distance of the current vertex is not set or the distance of the current vertex is greater than the distance of the current vertex + the weight of the edge
-            if (dist[v] == -1) {
+            if (dist[v] == std::numeric_limits<int>::max()) {
 				dist[v] = dist[u] + 1;
 				path[v] = u;
 				Q.push(v);
@@ -106,11 +111,24 @@ void Digraph::uwsssp(int s) const {
 }
 
 // construct positive weighted single source shortest path-tree for start vertex s
-// Dijktra�s algorithm
+// Dijkstras algorithm
 void Digraph::pwsssp(int s) const {
     assert(s >= 1 && s <= size);
-    
-    // *** TODO ***
+
+	// Dijkstras algorithm for start vertex s
+	std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> Q;
+	
+	//Loop to traverse the graph
+    for (int i = 0; i < size; ++i) {
+        dist[i] = std::numeric_limits<int>::max();
+        path[i] = 0;
+
+        //Loop to traverse the adjacency list of the current vertex
+        for (auto it = table[i].begin(); it != table[i].end(); ++it) {
+            Q.push(*it);
+        }
+    }
+	
 }
 
 // print graph
@@ -148,5 +166,10 @@ void Digraph::printTree() const {
 void Digraph::printPath(int t) const {
     assert(t >= 1 && t <= size);
 
-   // *** TODO ***
+    if (path[t] == 0) {
+		std::cout << "No path from " << t << " to " << size << "\n";
+    }
+    printPath(path[t]);
+	std::cout << t << " ";
+	
 }
