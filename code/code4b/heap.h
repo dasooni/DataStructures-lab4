@@ -28,6 +28,7 @@ public:
 
     bool isEmpty() const {
         return A.size() == 1;  // slot zero is not used
+
     }
 
     void insert(const Comparable x);
@@ -78,6 +79,7 @@ void Heap<Comparable>::percolateUp(size_t i) {
     A[i] = x;
 }
 
+
 template <class Comparable>
 void Heap<Comparable>::percolateDown(size_t i) {
     Comparable temp = A[i];
@@ -98,12 +100,13 @@ void Heap<Comparable>::percolateDown(size_t i) {
         }
     }
     A[i] = temp;
+}
 
-    void heapify(std::vector<Comparable>&V) {
-        int n = V.size() - 1;
+template <class Comparable>
+void heapify(std::vector<Comparable>& V) {
+    int n = V.size() - 1;
 
-        for (int i = n / 2; i >= 1; --i) {
-            percolateDown(V, i);
-        }
+    for (int i = n / 2; i >= 1; --i) {
+        percolateDown(V, i);
     }
 }

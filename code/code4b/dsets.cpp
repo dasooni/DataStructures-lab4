@@ -37,8 +37,10 @@ void DSets::join(int r, int s) {
     // simple union
     V[r] = s;
 
-    // *** TODO ***
-    // Do Union by Size
+
+	// do union by size
+	
+	
 }
 
 // return name of current set for x
