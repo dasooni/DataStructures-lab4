@@ -15,6 +15,10 @@ public:
     explicit Heap() : A(1) {  // slot zero is not used
     }
 
+    Heap(std::vector<Comparable>& V) : A{V} {
+        Heapify(A);
+    }
+
     // -- MEMBER FUNCTIONS
 
     void makeEmpty() {
@@ -94,4 +98,12 @@ void Heap<Comparable>::percolateDown(size_t i) {
         }
     }
     A[i] = temp;
+
+    void heapify(std::vector<Comparable>&V) {
+        int n = V.size() - 1;
+
+        for (int i = n / 2; i >= 1; --i) {
+            percolateDown(V, i);
+        }
+    }
 }

@@ -7,6 +7,7 @@
 
 #include <list>
 #include <vector>
+#include <limits> 
 
 #include "edge.h"
 
@@ -50,6 +51,7 @@ private:
     std::vector<std::list<Edge>> table;  // table of adjacency lists
     int size;                            // number of vertices
     int n_edges;                         // number of edges
+    int inf{ std::numeric_limits<int>::max() };	    // maximum value for int
 
     // vectors below can be modified by const-member functions
     // these vectors are used by member functions uwsssp and pwsssp to store info related to shortest paths
@@ -62,6 +64,8 @@ private:
     explicit Digraph(int n);
 
    // Add  any auxiliarly member functions, if needed 
+    void recursivePrint(int t) const;
+    
 };
 
   

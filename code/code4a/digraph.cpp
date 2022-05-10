@@ -8,6 +8,7 @@
 #include <vector>
 #include <cassert>
 
+
 #include "digraph.h"
 #include <queue>
 
@@ -70,43 +71,33 @@ void Digraph::removeEdge(const Edge& e) {
 void Digraph::uwsssp(int s) const {
     assert(s >= 1 && s <= size);
 
-
     // Queue used for BFS traversal
     std::queue<int> Q;
-	
-    for (int i = 0; i < size; ++i) {
 
-		dist[i] = std::numeric_limits<int>::max();
+    for (auto i = 1; i <= size; i++)
+    {
+        dist[i] = inf;
         path[i] = 0;
     }
-
-	
-	//Setting the distance of the start vertex to 0
-	dist[s] = 0;
-    //Pushing the start vertex into the queue 
+   
+    dist[s] = 0;
     Q.push(s);
 
-
-	// Loop to traverse the graph. Until queue is empty.
-    while (!Q.empty()) {
-    
-        int u = Q.front(); 
+    while (!Q.empty())
+    {
+        int vertex = Q.front();
         Q.pop();
 
-		std::cout << u << " ";
-		
-		//Loop to traverse the adjacency list of the current vertex
-        for (auto it = table[u].begin(); it != table[u].end(); ++it) {
-            int v = it->tail;
-			
-			//If the distance of the current vertex is not set or the distance of the current vertex is greater than the distance of the current vertex + the weight of the edge
-            if (dist[v] == std::numeric_limits<int>::max()) {
-				dist[v] = dist[u] + 1;
-				path[v] = u;
-				Q.push(v);
+        for (auto it = table[vertex].begin(); it != table[vertex].end(); it++)
+        {
+            int u = it->tail;
+
+            if (dist[u] == inf) {
+                dist[u] = dist[vertex] + 1;
+                path[u] = vertex;
+                Q.push(u);
             }
         }
-    
     }
 }
 
@@ -115,21 +106,51 @@ void Digraph::uwsssp(int s) const {
 void Digraph::pwsssp(int s) const {
     assert(s >= 1 && s <= size);
 
-	// Dijkstras algorithm for start vertex s
-	std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> Q;
-	
-	//Loop to traverse the graph
-    for (int i = 0; i < size; ++i) {
-        dist[i] = std::numeric_limits<int>::max();
+    // *** TODO ***
+    for (auto i = 1; i <= size; i++)
+    {
+        dist[i] = inf;
         path[i] = 0;
-
-        //Loop to traverse the adjacency list of the current vertex
-        for (auto it = table[i].begin(); it != table[i].end(); ++it) {
-            Q.push(*it);
-        }
+        done[i] = false;
     }
-	
+
+    dist[s] = 0;
+    done[s] = true;
+    int vertex = s;
+
+    while (true)
+    {
+        for (auto it = table[vertex].begin(); it != table[vertex].end(); it++)
+        {
+            int u = it->tail;
+
+           // std::cout << u << " ";
+
+            if (done[u] == false && dist[u] > dist[vertex] + it->weight) {
+                dist[u] = dist[vertex] + it->weight;
+                path[u] = vertex;
+            }
+        }
+        
+        int smallestDist = inf;
+        int index = 0;
+        for (auto i = 1; i < done.size(); i++)
+        {
+            //if false, check if it is the smallest dist value
+            if (done[i] == false) {
+                if (dist[i] < smallestDist) {
+                    index = i;
+                    smallestDist = dist[i];
+                }
+            }
+        }
+        vertex = index;
+        if (smallestDist == inf) break;
+        done[vertex] = true;
+
+    }
 }
+
 
 // print graph
 void Digraph::printGraph() const {
@@ -161,15 +182,30 @@ void Digraph::printTree() const {
     std::cout << "----------------------\n";
 }
 
+
+void Digraph::recursivePrint(int t) const {
+
+    if (path[t] == 0) {
+        std::cout << " " << t << " ";
+    }
+    else{
+        recursivePrint(path[t]);
+        std::cout << t << " ";
+        
+    }
+}
+
 // print shortest path from s to t and the corresponding path length
 // Hint: consider using recursion
+
 void Digraph::printPath(int t) const {
     assert(t >= 1 && t <= size);
 
-    if (path[t] == 0) {
-		std::cout << "No path from " << t << " to " << size << "\n";
+    if(t > size || t < 1) {
+        std::cout << "#error!" << " ";
+        return;
     }
-    printPath(path[t]);
-	std::cout << t << " ";
-	
+
+    recursivePrint(t);
+    std::cout << "(" << dist[t] << ")";
 }
