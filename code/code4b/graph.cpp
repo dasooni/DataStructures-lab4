@@ -81,24 +81,27 @@ void Graph::mstKruskal() const {
 	//create a heap
     Heap<Edge> heap;
 	DSets DSets(size);
+    int counter = 0;
     
     for (auto i : table) {
         for (auto e : i) {
             heap.insert(e);
         }
     }
-	
+    
 	//while the heap is not empty
-    while (!heap.isEmpty()) {
+    while (counter < size - 1) {
         //get the edge with the smallest weight
         Edge e = heap.deleteMin();
-        //if the two vertices are not in the same set
-        if (e == NULL) { return; }
+
         if (DSets.find(e.head) != DSets.find(e.tail)) {
-            //add the edge to the MST
+
             std::cout << e << std::endl;
+            
             //merge the sets
-            DSets.join(e.head, e.tail);
+            DSets.join(DSets.find(e.head), DSets.find(e.tail));
+			//increment the counter
+			counter++;
 
         }
     }
