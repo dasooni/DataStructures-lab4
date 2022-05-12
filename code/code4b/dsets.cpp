@@ -34,13 +34,17 @@ void DSets::join(int r, int s) {
     assert(V[r] < 0);
     assert(V[s] < 0);
 
-    // simple union
-    V[r] = s;
+	//union by size
 
+    if (V[r] < V[s]) {
+        V[r] = s;
+    }
+    else {
+        V[s] = r;
+    }
+    if (V[r] == V[s]) { --V[r]; } // update height
+	
 
-	// do union by size
-	
-	
 }
 
 // return name of current set for x

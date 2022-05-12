@@ -16,7 +16,7 @@ public:
     }
 
     Heap(std::vector<Comparable>& V) : A{V} {
-        Heapify(A);
+        heapify(A);
     }
 
     // -- MEMBER FUNCTIONS

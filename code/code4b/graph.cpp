@@ -93,6 +93,7 @@ void Graph::mstKruskal() const {
         //get the edge with the smallest weight
         Edge e = heap.deleteMin();
         //if the two vertices are not in the same set
+        if (e == NULL) { return; }
         if (DSets.find(e.head) != DSets.find(e.tail)) {
             //add the edge to the MST
             std::cout << e << std::endl;
