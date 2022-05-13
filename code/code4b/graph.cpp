@@ -74,6 +74,48 @@ void Graph::mstPrim() const {
     std::vector<bool> done(size_t(size) + 1);
 
     // *** TODO ***
+    for (size_t i = 1; i < size; i++)
+    {
+        dist[i] = inf;
+        path[i] = 0;
+        done[i] = false;
+    }
+    
+    dist[1] = 0;
+    done[1] = true;
+    int vertex = 1;
+
+    while (true)
+    {
+        for (auto it = table[vertex].begin(); it != table[vertex].end(); ++it) {
+            int u = it->tail; // u is a vertex adjacent to v
+
+            if (done[u] == false && dist[u] > it->weight) {
+                path[u] = vertex;
+                dist[u] = it->weight;
+            }
+        }
+        
+
+        int smallestDist = inf;
+        int index = 0;
+        
+        for (auto i = 1; i < done.size(); i++){
+            //if false, check if it is the smallest dist value
+            if (done[i] == false) {
+                if (dist[i] < smallestDist) {
+                    index = i;
+                    smallestDist = dist[i];
+                }
+            }
+        }
+
+        vertex = index;
+        if (smallestDist == inf) break;
+        done[vertex] = true;
+        std::cout << "( " << path[vertex] << ", " << vertex << ", " << dist[vertex] << " )\n";
+    }
+    
 }
 
 // Kruskal's minimum spanning tree algorithm

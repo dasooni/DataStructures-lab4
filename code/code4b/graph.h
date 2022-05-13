@@ -39,6 +39,7 @@ public:
     // print graph
     void printGraph() const;
 
+
 private:
     // -- Private CONSTRUCTOR
     explicit Graph(int n);  // Create a graph with n vertices and no vertices
@@ -47,4 +48,5 @@ private:
     std::vector<std::list<Edge>> table;  // table of adjacency lists
     int size;                            // number of vertices
     int n_edges;                         // number of edges
+    int inf{ std::numeric_limits<int>::max() };	    // maximum value for int
 };
