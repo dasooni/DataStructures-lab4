@@ -132,7 +132,7 @@ void Graph::mstKruskal() const {
     std::vector<Edge> edges;
 	
     for (auto& i : table) {
-		for( auto j : i) {
+        for (auto& j : i) {
 			if( j.tail > j.head ) {
 				edges.push_back(j);
 			}
@@ -159,7 +159,7 @@ void Graph::mstKruskal() const {
 
         }
     }
-    std::cout << "Total wight: " <<  weight << std::endl;
+    std::cout << "\n Total wight: " <<  weight << std::endl;
 }
 
 // print graph
