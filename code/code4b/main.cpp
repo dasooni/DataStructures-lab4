@@ -85,9 +85,9 @@ int menu() {
 }
 
 // Read a graph's data from a file and create the graph
-// Return a pointer to the graph
+// Return a pointer to the graph 
 std::unique_ptr<Graph> readGraph(const std::string& fileName) {
-    std::ifstream file{"../code/code4b/" + fileName};  // modify the file path, if needed
+    std::ifstream file{"../code/code4b/" + fileName };  // modify the file path, if needed
 
     if (!file) {
         std::cout << "File not found!\n";
