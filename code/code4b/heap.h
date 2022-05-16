@@ -39,6 +39,7 @@ private:
     // -- Private MEMBER FUNCTIONS
     void percolateUp(size_t i);
     void percolateDown(size_t i);
+	void heapify(std::vector<Comparable> &V);
 
     // -- DATA MEMBERS
     std::vector<Comparable> A;
@@ -102,11 +103,12 @@ void Heap<Comparable>::percolateDown(size_t i) {
     A[i] = temp;
 }
 
-template <class Comparable>
-void heapify(std::vector<Comparable>& V) {
-    int n = V.size() - 1;
+template<class Comparable>
+void Heap<Comparable>::heapify(std::vector<Comparable> &V)
+{
 
-    for (int i = n / 2; i >= 1; --i) {
-        percolateDown(V, i);
+    // build heap from vector V
+    for (size_t i = (V.size() - 1) / 2; i >= 1; --i) {
+		percolateDown(i);
     }
 }

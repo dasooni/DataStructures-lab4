@@ -87,7 +87,7 @@ void Graph::mstPrim() const {
 
     while (true)
     {
-        for (auto it = table[vertex].begin(); it != table[vertex].end(); ++it) { //Update dist[u] for each v’s adjacent vertex u, if better edge(v, u)
+        for (auto it = table[vertex].begin(); it != table[vertex].end(); ++it) { //Update dist[u] for each vï¿½s adjacent vertex u, if better edge(v, u)
             int u = it->tail; // u is a vertex adjacent to v
 
             if (done[u] == false && dist[u] > it->weight) {
@@ -119,18 +119,29 @@ void Graph::mstPrim() const {
 
 // Kruskal's minimum spanning tree algorithm
 void Graph::mstKruskal() const {
-	//create a heap
-    Heap<Edge> heap;
+	//Graph constructor creates from edge vector.
+    // insert edge inserts a single edge
 
-	DSets DSets(size);
-    int counter = 0;
+    DSets DSets(size);
     
-    for (auto& i : table) {
-        for (auto &j : i) {
-            heap.insert(j);
-        }
-    }
+    int counter = 0;
+    int weight = 0;
 
+	// heapify edges with heapify()
+	
+    std::vector<Edge> edges;
+	
+    for (auto& i : table) {
+		for( auto j : i) {
+			if( j.tail > j.head ) {
+				edges.push_back(j);
+			}
+		}
+		
+    }
+	
+    Heap<Edge> heap{edges};
+	
 	//while the heap is not empty
     while (counter < (size - 1) ) {
         //get the edge with the smallest weight
@@ -144,9 +155,11 @@ void Graph::mstKruskal() const {
             DSets.join(DSets.find(e.head), DSets.find(e.tail));
 			//increment the counter
 			counter++;
+			weight += e.weight;
 
         }
     }
+    std::cout << "Total wight: " <<  weight << std::endl;
 }
 
 // print graph
