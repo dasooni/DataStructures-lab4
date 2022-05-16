@@ -81,13 +81,13 @@ void Graph::mstPrim() const {
         done[i] = false;
     }
     
-    dist[1] = 0;
+    dist[1] = 0; //start can be any vertex, we choose the first one.
     done[1] = true;
     int vertex = 1;
 
     while (true)
     {
-        for (auto it = table[vertex].begin(); it != table[vertex].end(); ++it) {
+        for (auto it = table[vertex].begin(); it != table[vertex].end(); ++it) { //Update dist[u] for each v’s adjacent vertex u, if better edge(v, u)
             int u = it->tail; // u is a vertex adjacent to v
 
             if (done[u] == false && dist[u] > it->weight) {
@@ -96,10 +96,10 @@ void Graph::mstPrim() const {
             }
         }
         
-
         int smallestDist = inf;
         int index = 0;
         
+        //Find the min in array dist
         for (auto i = 1; i < done.size(); i++){
             //if false, check if it is the smallest dist value
             if (done[i] == false) {
@@ -109,7 +109,6 @@ void Graph::mstPrim() const {
                 }
             }
         }
-
         vertex = index;
         if (smallestDist == inf) break;
         done[vertex] = true;
