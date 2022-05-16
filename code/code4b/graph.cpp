@@ -80,17 +80,18 @@ void Graph::mstPrim() const {
 void Graph::mstKruskal() const {
 	//create a heap
     Heap<Edge> heap;
+
 	DSets DSets(size);
     int counter = 0;
     
-    for (auto i : table) {
-        for (auto e : i) {
-            heap.insert(e);
+    for (auto& i : table) {
+        for (auto &j : i) {
+            heap.insert(j);
         }
     }
-    
+
 	//while the heap is not empty
-    while (counter < size - 1) {
+    while (counter < (size - 1) ) {
         //get the edge with the smallest weight
         Edge e = heap.deleteMin();
 

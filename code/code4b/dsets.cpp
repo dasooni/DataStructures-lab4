@@ -42,7 +42,7 @@ void DSets::join(int r, int s) {
     else {
         V[s] = r;
     }
-    if (V[r] == V[s]) { --V[r]; } // update height
+    //if (V[r] == V[s]) { --V[r]; } // update height
 	
 
 }
