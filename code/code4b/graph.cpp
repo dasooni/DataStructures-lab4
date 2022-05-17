@@ -74,16 +74,19 @@ void Graph::mstPrim() const {
     std::vector<bool> done(size_t(size) + 1);
 
     // *** TODO ***
-    for (size_t i = 1; i < size; i++)
+    for (auto i = 1; i <= size; ++i)
     {
         dist[i] = inf;
         path[i] = 0;
         done[i] = false;
     }
     
-    dist[1] = 0; //start can be any vertex, we choose the first one.
-    done[1] = true;
+
     int vertex = 1;
+    int weight = 0;
+
+    dist[vertex] = 0; //start can be any vertex, we choose the first one.
+    done[vertex] = true;
 
     while (true)
     {
@@ -91,29 +94,32 @@ void Graph::mstPrim() const {
             int u = it->tail; // u is a vertex adjacent to v
 
             if (done[u] == false && dist[u] > it->weight) {
-                path[u] = vertex;
                 dist[u] = it->weight;
+                path[u] = vertex;
             }
         }
         
         int smallestDist = inf;
-        int index = 0;
+        int index;
         
         //Find the min in array dist
-        for (auto i = 1; i < done.size(); i++){
+        for (auto i = 1; i < size + 1; ++i){
             //if false, check if it is the smallest dist value
-            if (done[i] == false) {
-                if (dist[i] < smallestDist) {
-                    index = i;
+            if (done[i] == false && dist[i] < smallestDist) {
                     smallestDist = dist[i];
-                }
+                    index = i;
             }
         }
-        vertex = index;
+		
         if (smallestDist == inf) break;
-        done[vertex] = true;
+        
+        vertex = index;
         std::cout << "( " << path[vertex] << ", " << vertex << ", " << dist[vertex] << " )\n";
+        done[vertex] = true;
+		weight += dist[vertex];
+        
     }
+	std::cout << "\nTotal weight: " << weight << "\n";
     
 }
 
