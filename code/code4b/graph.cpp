@@ -10,6 +10,7 @@
 #include "graph.h"
 #include "heap.h"
 #include "dsets.h"
+#include <algorithm>
 
 // Note: graph vertices are numbered from 1 -- i.e. there is no vertex zero
 
@@ -73,7 +74,6 @@ void Graph::mstPrim() const {
     std::vector<int> path(size_t(size) + 1);
     std::vector<bool> done(size_t(size) + 1);
 
-    // *** TODO ***
     for (auto i = 1; i <= size; ++i)
     {
         dist[i] = inf;
@@ -100,7 +100,7 @@ void Graph::mstPrim() const {
         }
         
         int smallestDist = inf;
-        int index;
+        int index = 0;
         
         //Find the min in array dist
         for (auto i = 1; i < size + 1; ++i){
@@ -128,24 +128,32 @@ void Graph::mstKruskal() const {
 	//Graph constructor creates from edge vector.
     // insert edge inserts a single edge
 
-    DSets DSets(size);
+    DSets DSets( size );
     
-    int counter = 0;
-    int weight = 0;
-
-	// heapify edges with heapify()
+    int counter{ 0 };
+    int weight{ 0 };
 	
     std::vector<Edge> edges;
+	Heap<Edge> heap2{};
 	
-    for (auto& i : table) {
-        for (auto& j : i) {
-			if( j.tail > j.head ) {
-				edges.push_back(j);
-			}
+	//heapify unique edges
+	for (auto i = 1; i <= size; ++i) {
+		for (auto it = table[i].begin(); it != table[i].end(); ++it) {
+            if (i < it->tail) {
+                Edge e{ i, it->tail, it->weight };
+				heap2.insert(e);
+				std::cout << "inserting edge: " << e << "\n";
+                edges.push_back(e);
+            }
+			
 		}
-		
-    }
+	}
+
+	//sort edges by weight
+	std::sort(edges.begin(), edges.end(), [](const Edge &e1, const Edge &e2) { return e1.weight > e2.weight; });
 	
+	//for each edge in edges
+
     Heap<Edge> heap{edges};
 	
 	//while the heap is not empty
