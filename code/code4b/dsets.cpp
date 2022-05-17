@@ -52,13 +52,6 @@ void DSets::join(int r, int s) {
 int DSets::find(int x) {
     assert(x >= 1 && x <= V.size() - 1);
 
-   //// simple find
-   // if (V[x] < 0) {
-   //     return x;
-   // } else {
-   //     return find(V[x]);
-   // }
-
     // *** TODO ***
     // find with path compression
     if (V[x] == -1) {
